@@ -1,0 +1,43 @@
+---
+layout: default
+---
+<article class="post-content">
+  <h3>{{ page.title }}</h3>
+  <div class="post-card__meta">
+    <span>{{ page.date | date: "%d %B %Y" }}</span>
+    {% if page.categories.size > 0 %}
+      <span>| {{ page.categories | join: " / " }}</span>
+    {% endif %}
+    {% if page.author %}
+      <span>| {{ page.author }}</span>
+    {% endif %}
+  </div>
+  {% if page.tags.size > 0 %}
+    <div class="post-card__tags" style="margin: 6px 0;">
+      {% for tag in page.tags %}
+        <span class="y2k-tag">#{{ tag }}</span>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <hr>
+
+  {{ content }}
+
+  <hr>
+
+  <nav style="display: flex; justify-content: space-between; margin-top: 12px; font-size: 12px;">
+    {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}">
+        &laquo; {{ page.previous.title | truncatewords: 5 }}
+      </a>
+    {% else %}
+      <span></span>
+    {% endif %}
+    {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}">
+        {{ page.next.title | truncatewords: 5 }} &raquo;
+      </a>
+    {% endif %}
+  </nav>
+</article>

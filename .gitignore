@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+vendor/
+bundle/
+Gemfile.lock
+
+# Jekyll build
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Music files (uncomment to track MP3s in git)
+# assets/audio/*.mp3

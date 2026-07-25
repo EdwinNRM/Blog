@@ -1,0 +1,61 @@
+// ============================
+// Y2K Theme Variables (Seechain Style)
+// ============================
+
+// Colors - Win98 / Retro light theme
+$y2k-bg: #c0c0c0;
+$y2k-bg-page: #008080;
+$y2k-surface: #c0c0c0;
+$y2k-surface-light: #dfdfdf;
+$y2k-surface-dark: #808080;
+$y2k-border-light: #ffffff;
+$y2k-border-dark: #404040;
+$y2k-border-mid: #808080;
+$y2k-border: #808080;
+
+$y2k-primary: #000080;
+$y2k-primary-light: #0000ff;
+$y2k-secondary: #800080;
+$y2k-accent: #008000;
+$y2k-warning: #ffaa00;
+$y2k-error: #ff0000;
+
+$y2k-text: #000000;
+$y2k-text-dim: #404040;
+$y2k-text-bright: #ffffff;
+$y2k-link: #0000ff;
+$y2k-link-visited: #800080;
+$y2k-link-hover: #ff0000;
+
+// Title bar gradient
+$y2k-gradient-titlebar: linear-gradient(90deg, #000080, #1084d0);
+
+// Shadows (Win98 bevel)
+$y2k-bevel-outset: inset 1px 1px 0 $y2k-border-light, inset -1px -1px 0 $y2k-border-dark;
+$y2k-bevel-inset: inset 1px 1px 0 $y2k-border-dark, inset -1px -1px 0 $y2k-border-light;
+
+// Typography
+$y2k-font-body: 'Tahoma', 'MS Sans Serif', Arial, sans-serif;
+$y2k-font-pixel: 'VT323', 'Courier New', monospace;
+$y2k-font-display: 'MS Sans Serif', Tahoma, Arial, sans-serif;
+$y2k-font-mono: 'Courier New', monospace;
+
+// Spacing
+$y2k-space-xs: 2px;
+$y2k-space-sm: 4px;
+$y2k-space-md: 8px;
+$y2k-space-lg: 16px;
+$y2k-space-xl: 24px;
+$y2k-space-2xl: 32px;
+
+// Breakpoints
+$y2k-bp-sm: 480px;
+$y2k-bp-md: 768px;
+$y2k-bp-lg: 1024px;
+$y2k-bp-xl: 1200px;
+
+// Z-index layers
+$z-base: 1;
+$z-dropdown: 100;
+$z-overlay: 500;
+$z-modal: 1000;

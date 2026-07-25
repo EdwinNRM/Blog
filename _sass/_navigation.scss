@@ -1,0 +1,122 @@
+// ============================
+// Navigation (Seechain Style)
+// ============================
+
+// --- Sidebar Navigation ---
+.sidebar-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: block;
+    padding: 3px 6px;
+    font-size: 12px;
+    color: $y2k-text;
+    text-decoration: none;
+    border: 1px solid transparent;
+
+    &:hover {
+      background: $y2k-primary;
+      color: $y2k-text-bright;
+      text-decoration: none;
+    }
+
+    &.active {
+      font-weight: bold;
+      background: $y2k-surface-light;
+    }
+  }
+}
+
+.sidebar-title {
+  font-weight: bold;
+  font-size: 12px;
+  padding: 4px 6px;
+  margin: 4px 0 2px 0;
+  background: $y2k-gradient-titlebar;
+  color: $y2k-text-bright;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.sidebar-box {
+  margin-bottom: 8px;
+  border: 1px inset $y2k-border-mid;
+  padding: 6px;
+  background: #ffffff;
+  font-size: 11px;
+
+  &__title {
+    font-weight: bold;
+    font-size: 11px;
+    color: $y2k-primary;
+    margin-bottom: 4px;
+    padding-bottom: 2px;
+    border-bottom: 1px solid $y2k-border-mid;
+  }
+
+  &__content {
+    color: $y2k-text-dim;
+    line-height: 1.6;
+  }
+}
+
+// --- Menu Toggle (mobile) ---
+.menu-toggle {
+  display: none;
+  background: $y2k-bg;
+  border: 2px outset $y2k-border-light;
+  color: $y2k-text;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-family: $y2k-font-body;
+
+  &:active {
+    border-style: inset;
+  }
+
+  @media (max-width: $y2k-bp-md) {
+    display: block;
+    margin: 4px;
+  }
+}
+
+// --- Footer ---
+.site-footer {
+  border-top: 1px solid $y2k-border-mid;
+  padding: 8px;
+  text-align: center;
+  background: $y2k-bg;
+  font-size: 11px;
+  color: $y2k-text-dim;
+}
+
+.footer-text {
+  line-height: 1.8;
+
+  a {
+    color: $y2k-link;
+    font-size: 11px;
+  }
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.footer-counter {
+  margin-top: 8px;
+  font-family: $y2k-font-pixel;
+  font-size: 12px;
+  color: $y2k-text-dim;
+}

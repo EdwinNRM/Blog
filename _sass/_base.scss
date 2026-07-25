@@ -1,0 +1,59 @@
+// ============================
+// Base Reset & Foundation (Seechain Style)
+// ============================
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $y2k-font-body;
+  font-size: 13px;
+  background-color: $y2k-bg-page;
+  color: $y2k-text;
+  line-height: 1.4;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a {
+  color: $y2k-link;
+  text-decoration: underline;
+
+  &:visited {
+    color: $y2k-link-visited;
+  }
+
+  &:hover {
+    color: $y2k-link-hover;
+  }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid $y2k-border-mid;
+  border-bottom: 1px solid $y2k-border-light;
+  margin: $y2k-space-lg 0;
+}
+
+::selection {
+  background: $y2k-primary;
+  color: $y2k-text-bright;
+}

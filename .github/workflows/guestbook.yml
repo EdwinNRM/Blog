@@ -1,0 +1,60 @@
+name: Process Guestbook
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  add-guestbook:
+    if: contains(github.event.issue.labels.*.name, 'guestbook')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Extract guestbook entry
+        id: extract
+        run: |
+          TITLE="${{ github.event.issue.title }}"
+          BODY="${{ github.event.issue.body }}"
+
+          NAME=$(echo "$TITLE" | sed 's/^\[Guestbook\] //')
+
+          MESSAGE=$(echo "$BODY" | sed -n '/^\*\*Message:\*\*/,/^\*\*/p' | grep -v '^\*\*' | sed '/^$/d' | sed 's/^  //')
+
+          DATE=$(date +%Y-%m-%d)
+
+          echo "name=$NAME" >> $GITHUB_OUTPUT
+          echo "message<<EOF" >> $GITHUB_OUTPUT
+          echo "$MESSAGE" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "date=$DATE" >> $GITHUB_OUTPUT
+
+      - name: Add to guestbook.yml
+        run: |
+          ENTRY="  - name: \"${{ steps.extract.outputs.name }}\"\n    date: \"${{ steps.extract.outputs.date }}\"\n    message: \"${{ steps.extract.outputs.message }}\""
+          echo -e "\n$ENTRY" >> _data/guestbook.yml
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/guestbook.yml
+          git commit -m "Add guestbook entry from ${{ steps.extract.outputs.name }}"
+          git push
+
+      - name: Close issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed',
+              state_reason: 'completed'
+            });

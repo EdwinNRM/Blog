@@ -1,0 +1,22 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a href="{{ '/' | relative_url }}" class="site-logo">{{ site.title }}</a>
+
+    <button class="menu-toggle" aria-label="Toggle menu" onclick="toggleMenu()">☰</button>
+
+    <nav class="main-nav" id="main-nav">
+      {% for item in site.data.navigation %}
+        <a href="{{ item.url | relative_url }}"
+           class="nav-link {% if page.url == item.url %}active{% endif %}">
+          {{ item.title }}
+        </a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>
+
+<div class="site-marquee">
+  <div class="site-marquee__inner">
+    ★ Welcome to {{ site.title }} ★ {{ site.description }} ★ Bem-vindo ao meu cantinho na web ★
+  </div>
+</div>

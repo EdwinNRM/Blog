@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  {% include head.html %}
+</head>
+<body>
+  <div class="site-window">
+    <div class="title-bar">
+      <span>{{ site.title }}</span>
+      <div class="title-bar__buttons">
+        <span class="title-btn">_</span>
+        <span class="title-btn">□</span>
+        <span class="title-btn">×</span>
+      </div>
+    </div>
+
+    <div class="content-area">
+      <div class="sidebar">
+        {% include sidebar.html %}
+      </div>
+
+      <div class="main">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+
+  {% include footer.html %}
+
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+// ============================
+// Components (Seechain Style)
+// ============================
+
+// --- Win98 Window ---
+.y2k-window {
+  background: $y2k-bg;
+  border: 2px outset $y2k-border-light;
+  margin: 8px 0;
+
+  &__titlebar {
+    background: $y2k-gradient-titlebar;
+    padding: 2px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: $y2k-font-display;
+    font-size: 12px;
+    font-weight: bold;
+    color: $y2k-text-bright;
+    user-select: none;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: 2px;
+
+    span {
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      border: 1px outset $y2k-border-light;
+      background: $y2k-bg;
+      text-align: center;
+      line-height: 12px;
+      font-size: 9px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      font-family: $y2k-font-body;
+
+      &:active {
+        border-style: inset;
+      }
+    }
+  }
+
+  &__body {
+    padding: 8px;
+    background: #ffffff;
+    border-top: 1px solid $y2k-border-mid;
+  }
+}
+
+// --- Neon Card (adapted) ---
+.neon-card {
+  background: #ffffff;
+  border: 1px solid $y2k-border-mid;
+  padding: 12px;
+  margin: 8px 0;
+
+  &:hover {
+    border-color: $y2k-primary;
+  }
+}
+
+// --- Y2K Button ---
+.y2k-btn {
+  display: inline-block;
+  padding: 3px 12px;
+  font-family: $y2k-font-body;
+  font-size: 12px;
+  border: 2px outset $y2k-border-light;
+  background: $y2k-bg;
+  color: $y2k-text;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+
+  &:hover {
+    background: $y2k-surface-light;
+    text-decoration: none;
+  }
+
+  &:active {
+    border-style: inset;
+  }
+
+  &--primary {
+    background: $y2k-primary;
+    color: $y2k-text-bright;
+    border-color: $y2k-primary;
+
+    &:hover {
+      background: lighten($y2k-primary, 10%);
+    }
+  }
+}
+
+// --- Divider ---
+.y2k-divider {
+  border: none;
+  border-top: 1px solid $y2k-border-mid;
+  border-bottom: 1px solid $y2k-border-light;
+  margin: 12px 0;
+}
+
+// --- Tag / Badge ---
+.y2k-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  font-size: 10px;
+  border: 1px solid $y2k-border-mid;
+  background: $y2k-bg;
+  color: $y2k-text-dim;
+  text-decoration: none;
+
+  &:hover {
+    background: $y2k-surface-light;
+    color: $y2k-text;
+  }
+}
+
+// --- Banner Exchange ---
+.banner-exchange {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  padding: 8px 0;
+
+  img {
+    border: 1px solid $y2k-border-mid;
+    image-rendering: pixelated;
+
+    &:hover {
+      border-color: $y2k-primary;
+    }
+  }
+}
+
+// --- Gallery Grid ---
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 8px;
+
+  &__item {
+    border: 1px solid $y2k-border-mid;
+    overflow: hidden;
+    background: $y2k-bg;
+
+    &:hover {
+      border-color: $y2k-primary;
+    }
+
+    img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    &-caption {
+      padding: 4px;
+      font-size: 11px;
+      color: $y2k-text-dim;
+      text-align: center;
+      background: $y2k-bg;
+    }
+  }
+}
+
+// --- Post Card ---
+.post-card {
+  background: #ffffff;
+  border: 1px solid $y2k-border-mid;
+  padding: 12px;
+  margin-bottom: 12px;
+
+  &:hover {
+    border-color: $y2k-primary;
+  }
+
+  &__meta {
+    font-size: 11px;
+    color: $y2k-text-dim;
+    margin-bottom: 4px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  &__title {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 4px;
+
+    a {
+      color: $y2k-link;
+      &:hover {
+        color: $y2k-link-hover;
+      }
+    }
+  }
+
+  &__excerpt {
+    color: $y2k-text-dim;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 4px;
+  }
+
+  &__tags {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+}
+
+// ============================
+// Music Player
+// ============================
+
+.music-player {
+  background: #ffffff;
+  border: 1px inset $y2k-border-mid;
+  padding: 6px;
+  font-size: 11px;
+}
+
+.player-controls {
+  display: flex;
+  justify-content: center;
+  gap: 2px;
+  margin-bottom: 4px;
+}
+
+.player-btn {
+  width: 24px;
+  height: 20px;
+  border: 1px outset $y2k-border-light;
+  background: $y2k-bg;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $y2k-text;
+  padding: 0;
+  font-family: $y2k-font-body;
+
+  &:active {
+    border-style: inset;
+  }
+
+  &--play {
+    width: 32px;
+    font-size: 11px;
+  }
+}
+
+.player-info {
+  text-align: center;
+}
+
+.player-title {
+  font-weight: bold;
+  font-size: 11px;
+  color: $y2k-text;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-artist {
+  font-size: 10px;
+  color: $y2k-text-dim;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 4px;
+}
+
+.player-progress {
+  margin: 4px 0;
+}
+
+.player-progress__bar {
+  width: 100%;
+  height: 6px;
+  background: $y2k-surface-light;
+  border: 1px inset $y2k-border-mid;
+  cursor: pointer;
+  position: relative;
+}
+
+.player-progress__fill {
+  height: 100%;
+  background: $y2k-primary;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+.player-time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  color: $y2k-text-dim;
+  margin-top: 1px;
+}
+
+.player-volume {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 2px;
+}
+
+.player-vol-icon {
+  font-size: 10px;
+  color: $y2k-text-dim;
+}
+
+.player-vol-slider {
+  width: 60px;
+  height: 4px;
+  cursor: pointer;
+  accent-color: $y2k-primary;
+}
+
+// ============================
+// Guestbook Form
+// ============================
+
+.guestbook-form {
+  margin-top: 12px;
+
+  &__field {
+    margin-bottom: 6px;
+
+    label {
+      display: block;
+      font-size: 11px;
+      font-weight: bold;
+      margin-bottom: 2px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 3px 4px;
+      border: 1px inset $y2k-border-mid;
+      background: #ffffff;
+      font-family: $y2k-font-body;
+      font-size: 11px;
+    }
+
+    textarea {
+      height: 60px;
+      resize: vertical;
+    }
+  }
+
+  &__submit {
+    border: 2px outset $y2k-border-light;
+    background: $y2k-bg;
+    padding: 3px 16px;
+    font-family: $y2k-font-body;
+    font-size: 11px;
+    cursor: pointer;
+
+    &:active {
+      border-style: inset;
+    }
+  }
+}
+
+.guestbook-msg {
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid $y2k-border-mid;
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__date {
+    font-size: 10px;
+    color: #808080;
+  }
+
+  &__text {
+    margin-top: 2px;
+  }
+}

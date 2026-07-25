@@ -1,0 +1,134 @@
+// ============================
+// Layout System (Seechain Style)
+// ============================
+
+.site-window {
+  max-width: 800px;
+  margin: 20px auto;
+  background: $y2k-bg;
+  border: 2px outset $y2k-border-light;
+  box-shadow: 2px 2px 0 #000;
+
+  @media (max-width: $y2k-bp-md) {
+    margin: 10px;
+  }
+}
+
+.title-bar {
+  background: $y2k-gradient-titlebar;
+  padding: 2px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: $y2k-font-display;
+  font-size: 12px;
+  font-weight: bold;
+  color: $y2k-text-bright;
+  user-select: none;
+  letter-spacing: 0;
+}
+
+.title-bar__buttons {
+  display: flex;
+  gap: 2px;
+
+  .title-btn {
+    display: inline-block;
+    width: 16px;
+    height: 14px;
+    border: 1px outset $y2k-border-light;
+    background: $y2k-bg;
+    text-align: center;
+    line-height: 12px;
+    font-size: 9px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    font-family: $y2k-font-body;
+
+    &:active {
+      border-style: inset;
+    }
+  }
+}
+
+.content-area {
+  display: flex;
+  min-height: 500px;
+
+  @media (max-width: $y2k-bp-md) {
+    flex-direction: column;
+  }
+}
+
+.sidebar {
+  width: 180px;
+  min-width: 180px;
+  border-right: 1px solid $y2k-border-mid;
+  padding: 4px;
+  background: $y2k-bg;
+  font-size: 12px;
+
+  @media (max-width: $y2k-bp-md) {
+    width: 100%;
+    min-width: 100%;
+    border-right: none;
+    border-bottom: 1px solid $y2k-border-mid;
+  }
+}
+
+.main {
+  flex: 1;
+  padding: 12px;
+  background: #ffffff;
+  overflow: hidden;
+  min-width: 0;
+
+  @media (max-width: $y2k-bp-md) {
+    padding: 8px;
+  }
+}
+
+.page-title {
+  font-family: $y2k-font-body;
+  font-size: 16px;
+  font-weight: bold;
+  color: $y2k-text;
+  margin-bottom: $y2k-space-lg;
+  padding-bottom: $y2k-space-sm;
+  border-bottom: 2px solid $y2k-primary;
+}
+
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: $y2k-space-lg;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $y2k-space-sm;
+  margin-top: $y2k-space-xl;
+  font-size: 12px;
+
+  a, span {
+    padding: 2px 8px;
+    border: 1px outset $y2k-border-light;
+    background: $y2k-bg;
+    color: $y2k-text;
+    text-decoration: none;
+    font-size: 11px;
+
+    &:hover {
+      background: $y2k-surface-light;
+    }
+  }
+
+  .current {
+    background: $y2k-primary;
+    color: $y2k-text-bright;
+    border-style: inset;
+  }
+}

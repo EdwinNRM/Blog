@@ -1,0 +1,29 @@
+---
+layout: default
+---
+<h3>Welcome</h3>
+<p>Hello! I'm <strong>edwinnrm</strong>, your new neighbor on the web.</p>
+<p>This is my little corner of the web: simple, quiet, and with a touch of nostalgia. Here, I share a bit about myself, what I enjoy, and those little things that might only matter to me.</p>
+
+<hr>
+
+<h3>Getting Started</h3>
+<ul style="padding-left: 20px; list-style: disc;">
+  <li>If JavaScript is disabled in your browser, you can still access all pages through the <a href="{{ '/sitemap/' | relative_url }}">Sitemap</a>.</li>
+</ul>
+
+<h3>Last Updates</h3>
+<ul style="padding-left: 20px; list-style: disc;">
+  {% for post in site.posts limit:5 %}
+    <li>
+      {{ post.date | date: "%d %b %Y" }} - New Post: <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+  {% endfor %}
+</ul>
+
+<hr>
+
+<div class="banner-exchange">
+  <!-- Adicione seus banners aqui -->
+  <span style="font-size: 11px; color: #808080;">[ Banners em breve ]</span>
+</div>
