@@ -1,4 +1,4 @@
-# edwinnrm
+# Personal Blog
 
 Personal blog with Y2K aesthetic, built with Jekyll and hosted on GitHub Pages.
 
