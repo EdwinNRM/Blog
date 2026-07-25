@@ -63,13 +63,11 @@ permalink: /guestbook/
 
     var title = '[Guestbook] ' + name;
     var body = '## Guestbook Entry\n\n**Name:** ' + name + '\n\n**Message:**\n\n' + message;
-    var labels = 'guestbook';
     var repo = 'EdwinNRM/Blog';
 
     var url = 'https://github.com/' + repo + '/issues/new?title='
       + encodeURIComponent(title)
-      + '&body=' + encodeURIComponent(body)
-      + '&labels=' + encodeURIComponent(labels);
+      + '&body=' + encodeURIComponent(body);
 
     window.open(url, '_blank');
     status.textContent = 'Opening GitHub... Submit the issue to sign the guestbook.';
