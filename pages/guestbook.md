@@ -62,7 +62,7 @@ permalink: /guestbook/
     var title = '[Guestbook] ' + name;
     var body = '## Guestbook Entry\n\n**Name:** ' + name + '\n\n**Message:**\n\n' + message;
     var labels = 'guestbook';
-    var repo = 'edwinnrm/edwinnrm.github.io';
+    var repo = 'EdwinNRM/Blog';
 
     var url = 'https://github.com/' + repo + '/issues/new?title='
       + encodeURIComponent(title)

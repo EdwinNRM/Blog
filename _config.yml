@@ -1,7 +1,7 @@
 title: "edwinnrm"
 description: "Apenas um blog pessoal"
 url: "https://edwinnrm.github.io"
-baseurl: ""
+baseurl: "/Blog"
 permalink: /:categories/:title/
 
 markdown: kramdown

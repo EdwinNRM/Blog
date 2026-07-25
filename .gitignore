@@ -29,5 +29,8 @@ desktop.ini
 .vscode/
 .idea/
 
+# Python script
+add_music.py
+
 # Music files (uncomment to track MP3s in git)
 # assets/audio/*.mp3
