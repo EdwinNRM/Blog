@@ -2,13 +2,11 @@
   url: /
 - title: Blog
   url: /blog/
-- title: Sobre
-  url: /about/
 - title: Galeria
   url: /gallery/
-- title: Links
-  url: /links/
 - title: Guestbook
   url: /guestbook/
+- title: Links
+  url: /links/
 - title: Sitemap
   url: /sitemap/

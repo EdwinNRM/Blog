@@ -14,7 +14,7 @@
     const el = document.getElementById("player-tracks");
     if (!el) return;
 
-    tracks = JSON.parse(el.dataset.tracks || "[]");
+    tracks = JSON.parse(el.textContent || "[]");
     if (tracks.length === 0) return;
 
     audio = new Audio();
