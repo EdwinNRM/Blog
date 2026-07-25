@@ -49,14 +49,14 @@ jobs:
           DATE='${{ toJSON(steps.extract.outputs.date) }}'
           MESSAGE='${{ toJSON(steps.extract.outputs.message) }}'
           python3 -c "
-import json, sys
-name = json.loads(sys.argv[1])
-date = json.loads(sys.argv[2])
-message = json.loads(sys.argv[3])
-entry = '- name: \"' + name + '\"\n  date: \"' + date + '\"\n  message: \"' + message + '\"'
-with open('_data/guestbook.yml', 'a') as f:
-    f.write('\n' + entry + '\n')
-" "$NAME" "$DATE" "$MESSAGE"
+          import json, sys
+          name = json.loads(sys.argv[1])
+          date = json.loads(sys.argv[2])
+          message = json.loads(sys.argv[3])
+          entry = '- name: \"' + name + '\"\n  date: \"' + date + '\"\n  message: \"' + message + '\"'
+          with open('_data/guestbook.yml', 'a') as f:
+              f.write('\n' + entry + '\n')
+          " "$NAME" "$DATE" "$MESSAGE"
 
       - name: Commit and push
         run: |
