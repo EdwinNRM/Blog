@@ -25,8 +25,10 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
+  - vendor
   - PLAN.md
   - README.md
+  - add_music.py
 
 include:
   - pages
