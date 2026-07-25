@@ -5,7 +5,7 @@ permalink: /guestbook/
 ---
 
 <h3>Guestbook</h3>
-<p>Sign my guestbook! Leave a message and let me know you were here.</p>
+<p>Escreve alguma coisa bacana e deixa sua marca por aqui!</p>
 
 <div class="y2k-window" style="margin: 12px 0;">
   <div class="y2k-window__titlebar">
@@ -29,7 +29,7 @@ permalink: /guestbook/
   </div>
 </div>
 
-<h3>Leave a message</h3>
+<h3>Deixa sua mensagem</h3>
 
 <div class="guestbook-form">
   <div class="guestbook-form__field">

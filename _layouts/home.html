@@ -2,28 +2,47 @@
 layout: default
 ---
 <h3>Welcome</h3>
-<p>Hello! I'm <strong>edwinnrm</strong>, your new neighbor on the web.</p>
-<p>This is my little corner of the web: simple, quiet, and with a touch of nostalgia. Here, I share a bit about myself, what I enjoy, and those little things that might only matter to me.</p>
+<p>Olá! Eu sou <strong>edwinnrm</strong>, seu novo vizinho na web.</p>
+<p>Este é meu cantinho na web: simples, quieto, com um toque de nostalgia. Aqui eu compartilho um pouco sobre mim, o que eu gosto, e aquelas coisas que talvez so importem pra mim.</p>
 
 <hr>
 
-<h3>Getting Started</h3>
-<ul style="padding-left: 20px; list-style: disc;">
-  <li>If JavaScript is disabled in your browser, you can still access all pages through the <a href="{{ '/sitemap/' | relative_url }}">Sitemap</a>.</li>
-</ul>
+<h3>Interesses</h3>
+<div class="y2k-window" style="margin: 8px 0;">
+  <div class="y2k-window__titlebar">
+    <span>about.txt</span>
+    <div class="y2k-window__buttons">
+      <span>_</span><span>□</span><span>×</span>
+    </div>
+  </div>
+  <div class="y2k-window__body">
+    <ul style="padding-left: 20px; list-style: disc; margin: 0;">
+      <li>Tecnologia</li>
+      <li>Jogos</li>
+      <li>Pixel art</li>
+      <li>Músicas</li>
+      <li>e muito mais</li>
+    </ul>
+  </div>
+</div>
 
-<h3>Last Updates</h3>
+<hr>
+
+<h3>Últimas Atualizações</h3>
 <ul style="padding-left: 20px; list-style: disc;">
   {% for post in site.posts limit:5 %}
     <li>
-      {{ post.date | date: "%d %b %Y" }} - New Post: <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      {{ post.date | date: "%d %b %Y" }} - Novo Post: <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
     </li>
   {% endfor %}
 </ul>
 
+{% if site.posts.size == 0 %}
+  <p style="font-size: 11px; color: #808080;">Nenhuma postagem ainda.</p>
+{% endif %}
+
 <hr>
 
 <div class="banner-exchange">
-  <!-- Adicione seus banners aqui -->
   <span style="font-size: 11px; color: #808080;">[ Banners em breve ]</span>
 </div>

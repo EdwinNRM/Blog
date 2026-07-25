@@ -5,15 +5,15 @@ permalink: /about/
 ---
 
 <h3>Hello World</h3>
-<p>Welcome to my little corner of the web. Here I share my thoughts, interests, and a bit of that Y2K aesthetic that I love.</p>
+<p>Bem vindo ao meu blog pessoal, por aqui postarei tudo o que eu achar interessante.</p>
 
-<h3>Interests</h3>
+<h3>Interesses:</h3>
 <ul style="padding-left: 20px; list-style: disc;">
-  <li>Technology and retro web</li>
-  <li>Y2K aesthetics</li>
+  <li>Tecnologia</li>
+  <li>Jogos</li>
   <li>Pixel art</li>
-  <li>Music</li>
-  <li>And much more...</li>
+  <li>Musicas</li>
+  <li>e muito mais</li>
 </ul>
 
 <h3>Status</h3>
@@ -25,7 +25,7 @@ permalink: /about/
     </div>
   </div>
   <div class="y2k-window__body">
-    <p><strong>Mood:</strong> Exploring the web</p>
+    <p><strong>Mood:</strong> Animado</p>
     <p><strong>Listening:</strong> ~ music ~</p>
     <p><strong>Status:</strong> Online</p>
   </div>

@@ -4,7 +4,7 @@ title: Galeria
 permalink: /gallery/
 ---
 
-<p>A collection of images, art and cool stuff.</p>
+<p>Algumas imagens que eu achei por ai</p>
 
 <div class="gallery-grid">
   <div class="gallery-grid__item">

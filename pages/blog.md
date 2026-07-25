@@ -4,7 +4,7 @@ title: Blog
 permalink: /blog/
 ---
 
-<h3>Blog Posts</h3>
+<h3>Postagens</h3>
 
 <div class="post-list">
   {% for post in paginator.posts %}
@@ -37,7 +37,7 @@ permalink: /blog/
 {% if site.posts.size == 0 %}
   <div class="neon-card" style="text-align: center; padding: 24px;">
     <p style="color: #808080;">
-      No posts yet. Come back soon!
+      Sem postagens! Volta logo :p
     </p>
   </div>
 {% endif %}

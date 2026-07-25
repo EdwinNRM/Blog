@@ -3,27 +3,12 @@ layout: post
 title: "Meu Primeiro Post"
 date: 2026-07-24
 categories: [geral]
-tags: [y2k, inicio, blog]
+tags: [windows, inicio, blog]
 author: edwinnrm
 ---
 
-Welcome to my blog! This is my first post here on my Y2K corner.
+Olá! Esta é a minha primeira postagem por aqui.
 
-## Why Y2K?
+A ideia principal deste blog é ser um espaço simples e nostálgico, mantendo toda aquela estética clássica da época do Windows 98 e do XP. 
 
-The aesthetic of the 2000s has something special. Neon colors, chrome gradients, glow effects... all of this creates a unique atmosphere that mixes nostalgia with futurism.
-
-## What to expect here
-
-- **Personal articles** about technology and life
-- **Curation** of cool things I find on the web
-- **Diary** and behind the scenes
-- **Y2K vibes** in every corner of the site
-
-## Next steps
-
-I'm just getting started, so the site will grow over time. Every page, every post, every visual detail is thoughtfully crafted.
-
-> "The future is so yesterday." — Y2K motto
-
-Thanks for visiting!
+Vou usar este blog para compartilhar algumas coisas pela web. Sejam bem-vindos!
