@@ -14,6 +14,9 @@
     const el = document.getElementById("player-tracks");
     if (!el) return;
 
+    const container = document.getElementById("music-player");
+    window._PLAYER_BASEURL = container ? container.dataset.baseurl || "/" : "/";
+
     tracks = JSON.parse(el.textContent || "[]");
     if (tracks.length === 0) return;
 
@@ -76,7 +79,7 @@
     if (index < 0 || index >= tracks.length) return;
     currentTrack = index;
     var t = tracks[currentTrack];
-    audio.src = "/assets/audio/" + t.file;
+    audio.src = window._PLAYER_BASEURL + "assets/audio/" + encodeURIComponent(t.file);
     document.getElementById("player-title").textContent = t.title;
     document.getElementById("player-artist").textContent = t.artist + " - " + t.album + " (" + t.year + ")";
     document.getElementById("player-progress-fill").style.width = "0%";

@@ -4,7 +4,6 @@ title: Guestbook
 permalink: /guestbook/
 ---
 
-<h3>Guestbook</h3>
 <p>Escreve alguma coisa bacana e deixa sua marca por aqui!</p>
 
 <div class="y2k-window" style="margin: 12px 0;">
@@ -42,6 +41,9 @@ permalink: /guestbook/
   </div>
   <button id="gb-submit" class="guestbook-form__submit">Send</button>
   <p id="gb-status" style="font-size: 10px; color: #808080; margin-top: 4px;"></p>
+  <p style="font-size: 10px; color: #808080; margin-top: 4px;">
+    &#9432; You need to be logged into GitHub to submit a message.
+  </p>
 </div>
 
 <script>
