@@ -147,12 +147,6 @@
   <div class="y2k-window__body">
     
       <div class="guestbook-msg">
-        <span class="guestbook-msg__name">teste</span>
-        <span class="guestbook-msg__date"> (2026-07-25)</span>
-        <p class="guestbook-msg__text">teste</p>
-      </div>
-    
-      <div class="guestbook-msg">
         <span class="guestbook-msg__name">edwinnrm</span>
         <span class="guestbook-msg__date"> (2026-07-24)</span>
         <p class="guestbook-msg__text">Bem-vindos ao meu blog!</p>
@@ -198,13 +192,11 @@
 
     var title = '[Guestbook] ' + name;
     var body = '## Guestbook Entry\n\n**Name:** ' + name + '\n\n**Message:**\n\n' + message;
-    var labels = 'guestbook';
     var repo = 'EdwinNRM/Blog';
 
     var url = 'https://github.com/' + repo + '/issues/new?title='
       + encodeURIComponent(title)
-      + '&body=' + encodeURIComponent(body)
-      + '&labels=' + encodeURIComponent(labels);
+      + '&body=' + encodeURIComponent(body);
 
     window.open(url, '_blank');
     status.textContent = 'Opening GitHub... Submit the issue to sign the guestbook.';
