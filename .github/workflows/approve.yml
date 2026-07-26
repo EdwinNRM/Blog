@@ -53,9 +53,14 @@ jobs:
             console.log(`Message: ${message}`);
             console.log(`Approved: ${isApproved}`);
 
+            // Escape YAML-special characters (backslash and double quote)
+            function yamlEscape(s) {
+              return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+            }
+
             // Write to data file if approved
             if (isApproved && type) {
-              const entry = `\n- name: "${name}"\n  date: "${date}"\n  message: "${message}"\n`;
+              const entry = `\n- name: "${yamlEscape(name)}"\n  date: "${yamlEscape(date)}"\n  message: "${yamlEscape(message)}"\n`;
 
               if (type === 'guestbook') {
                 fs.appendFileSync('_data/guestbook.yml', entry, 'utf-8');
@@ -71,15 +76,15 @@ jobs:
             // Commit and push if approved
             if (isApproved && type) {
               const cp = require('child_process');
-              cp.execSync('git config user.name "github-actions[bot]"', { stdio: 'pipe' });
-              cp.execSync('git config user.email "github-actions[bot]@users.noreply.github.com"', { stdio: 'pipe' });
-              cp.execSync('git add _data/', { stdio: 'pipe' });
+              cp.spawnSync('git', ['config', 'user.name', 'github-actions[bot]'], { stdio: 'pipe' });
+              cp.spawnSync('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com'], { stdio: 'pipe' });
+              cp.spawnSync('git', ['add', '_data/'], { stdio: 'pipe' });
 
               const diffResult = cp.spawnSync('git', ['diff', '--staged', '--quiet'], { stdio: 'pipe' });
               if (diffResult.status !== 0) {
-                cp.execSync(`git commit -m "Add ${type} from ${name}"`, { stdio: 'pipe' });
-                cp.execSync('git pull --rebase', { stdio: 'pipe' });
-                cp.execSync('git push', { stdio: 'pipe' });
+                cp.spawnSync('git', ['commit', '-m', `Add ${type} from ${name}`], { stdio: 'pipe' });
+                cp.spawnSync('git', ['pull', '--rebase'], { stdio: 'pipe' });
+                cp.spawnSync('git', ['push'], { stdio: 'pipe' });
                 console.log('Committed and pushed');
 
                 // Trigger deploy
