@@ -68,7 +68,7 @@ permalink: /guestbook/
       var res = await fetch(WORKER_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, message: message })
+        body: JSON.stringify({ name: name, message: message, type: 'guestbook' })
       });
       var data = await res.json();
 
