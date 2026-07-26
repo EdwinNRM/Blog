@@ -31,7 +31,7 @@
   <div class="sidebar-title">Now Playing</div>
   <div class="sidebar-box">
     <div class="sidebar-box__content">
-      <div id="music-player" class="music-player" data-baseurl="{{ '/' | relative_url }}"></div>
+      <div id="music-player" data-baseurl="{{ '/' | relative_url }}"></div>
       <script id="player-tracks" type="application/json">{{ site.data.music | jsonify }}</script>
       <script src="{{ '/assets/js/player.js' | relative_url }}"></script>
     </div>
