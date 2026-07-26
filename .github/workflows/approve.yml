@@ -77,6 +77,7 @@ jobs:
               const diffResult = cp.spawnSync('git', ['diff', '--staged', '--quiet'], { stdio: 'pipe' });
               if (diffResult.status !== 0) {
                 cp.execSync(`git commit -m "Add ${type} from ${name}"`, { stdio: 'pipe' });
+                cp.execSync('git pull --rebase', { stdio: 'pipe' });
                 cp.execSync('git push', { stdio: 'pipe' });
                 console.log('Committed and pushed');
 
