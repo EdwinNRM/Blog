@@ -200,37 +200,52 @@
   </div>
   <button id="gb-submit" class="guestbook-form__submit">Send</button>
   <p id="gb-status" style="font-size: 10px; color: #808080; margin-top: 4px;"></p>
-  <p style="font-size: 10px; color: #808080; margin-top: 4px;">
-    &#9432; You need to be logged into GitHub to submit a message.
-  </p>
 </div>
 
 <script>
 (function() {
   var btn = document.getElementById('gb-submit');
   var status = document.getElementById('gb-status');
+  var WORKER_URL = 'https://guestbook-worker.edwinnrm.workers.dev/';
 
-  btn.addEventListener('click', function() {
+
+  btn.addEventListener('click', async function() {
     var name = document.getElementById('gb-name').value.trim();
     var message = document.getElementById('gb-message').value.trim();
 
     if (!name || !message) {
-      status.textContent = 'Please fill in all fields.';
+      status.textContent = 'Preencha todos os campos.';
       status.style.color = '#ff0000';
       return;
     }
 
-    var title = '[Guestbook] ' + name;
-    var body = '## Guestbook Entry\n\n**Name:** ' + name + '\n\n**Message:**\n\n' + message;
-    var repo = 'EdwinNRM/Blog';
+    btn.disabled = true;
+    status.textContent = 'Enviando...';
+    status.style.color = '#808080';
 
-    var url = 'https://github.com/' + repo + '/issues/new?title='
-      + encodeURIComponent(title)
-      + '&body=' + encodeURIComponent(body);
+    try {
+      var res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: name, message: message })
+      });
+      var data = await res.json();
 
-    window.open(url, '_blank');
-    status.textContent = 'Opening GitHub... Submit the issue to sign the guestbook.';
-    status.style.color = '#008000';
+      if (data.success) {
+        status.textContent = 'Mensagem enviada com sucesso! Atualize a página para vê-la.';
+        status.style.color = '#008000';
+        document.getElementById('gb-name').value = '';
+        document.getElementById('gb-message').value = '';
+      } else {
+        status.textContent = 'Erro: ' + (data.error || 'tente novamente.');
+        status.style.color = '#ff0000';
+      }
+    } catch (e) {
+      status.textContent = 'Erro de conexão. Tente novamente.';
+      status.style.color = '#ff0000';
+    }
+
+    btn.disabled = false;
   });
 })();
 </script>
