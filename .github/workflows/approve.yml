@@ -15,22 +15,20 @@ jobs:
       issues: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Extract issue data
-        id: extract
+      - name: Process approval
         uses: actions/github-script@v7
         with:
           script: |
+            const fs = require('fs');
             const title = context.payload.issue.title;
             const body = context.payload.issue.body || '';
             const labels = context.payload.issue.labels.map(l => l.name);
+            const isApproved = labels.includes('approved');
 
-            let type = '';
-            let post = '';
-            let name = '';
-
+            // Extract type, name, post from title
+            let type = '', name = '', post = '';
             if (title.startsWith('[Guestbook]')) {
               type = 'guestbook';
               name = title.replace('[Guestbook]', '').trim();
@@ -41,100 +39,66 @@ jobs:
               name = parts[1] || '';
             }
 
-            const lines = body.split('\n');
-            let message = '';
-            let date = '';
-            let inMessage = false;
+            // Extract message and date from body
+            let message = '', date = '';
+            for (const line of body.split('\n')) {
+              const t = line.trim();
+              if (t.startsWith('**Message:**')) message = t.replace('**Message:**', '').trim();
+              if (t.startsWith('**Date:**')) date = t.replace('**Date:**', '').trim();
+            }
+            if (!date) date = new Date().toISOString().split('T')[0];
 
-            for (const line of lines) {
-              const trimmed = line.trim();
-              if (trimmed.startsWith('**Message:**')) {
-                inMessage = true;
-                message = trimmed.replace('**Message:**', '').trim();
-              } else if (trimmed.startsWith('**Date:**')) {
-                date = trimmed.replace('**Date:**', '').trim();
-              } else if (inMessage && trimmed && !trimmed.startsWith('**')) {
-                message += '\n' + trimmed;
+            console.log(`Type: ${type}, Name: ${name}, Date: ${date}, Post: ${post}`);
+            console.log(`Message: ${message}`);
+            console.log(`Approved: ${isApproved}`);
+
+            // Write to data file if approved
+            if (isApproved && type) {
+              const entry = `\n- name: "${name}"\n  date: "${date}"\n  message: "${message}"\n`;
+
+              if (type === 'guestbook') {
+                fs.appendFileSync('_data/guestbook.yml', entry, 'utf-8');
+                console.log('Appended to _data/guestbook.yml');
+              } else if (type === 'comment' && post) {
+                const dir = '_data/comments';
+                if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+                fs.appendFileSync(`${dir}/${post}.yml`, entry, 'utf-8');
+                console.log(`Appended to _data/comments/${post}.yml`);
               }
             }
 
-            if (!date) {
-              date = new Date().toISOString().split('T')[0];
+            // Commit and push if approved
+            if (isApproved && type) {
+              const cp = require('child_process');
+              cp.execSync('git config user.name "github-actions[bot]"', { stdio: 'pipe' });
+              cp.execSync('git config user.email "github-actions[bot]@users.noreply.github.com"', { stdio: 'pipe' });
+              cp.execSync('git add _data/', { stdio: 'pipe' });
+
+              const diffResult = cp.spawnSync('git', ['diff', '--staged', '--quiet'], { stdio: 'pipe' });
+              if (diffResult.status !== 0) {
+                cp.execSync(`git commit -m "Add ${type} from ${name}"`, { stdio: 'pipe' });
+                cp.execSync('git push', { stdio: 'pipe' });
+                console.log('Committed and pushed');
+
+                // Trigger deploy
+                await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'jekyll.yml',
+                  ref: 'main'
+                });
+                console.log('Deploy triggered');
+              } else {
+                console.log('No changes to commit');
+              }
             }
 
-            core.setOutput('type', type);
-            core.setOutput('name', name);
-            core.setOutput('message', message);
-            core.setOutput('date', date);
-            core.setOutput('post', post);
-            core.setOutput('approved', String(labels.includes('approved')));
-
-      - name: Add to guestbook
-        if: steps.extract.outputs.approved == 'true' && steps.extract.outputs.type == 'guestbook'
-        run: |
-          NAME='${{ toJSON(steps.extract.outputs.name) }}'
-          DATE='${{ toJSON(steps.extract.outputs.date) }}'
-          MESSAGE='${{ toJSON(steps.extract.outputs.message) }}'
-          python3 -c "
-          import json, sys
-          name = json.loads(sys.argv[1])
-          date = json.loads(sys.argv[2])
-          message = json.loads(sys.argv[3])
-          entry = '- name: \"' + name + '\"\n  date: \"' + date + '\"\n  message: \"' + message + '\"'
-          with open('_data/guestbook.yml', 'a', encoding='utf-8') as f:
-              f.write('\n' + entry + '\n')
-          "
-
-      - name: Add to comments
-        if: steps.extract.outputs.approved == 'true' && steps.extract.outputs.type == 'comment'
-        run: |
-          NAME='${{ toJSON(steps.extract.outputs.name) }}'
-          DATE='${{ toJSON(steps.extract.outputs.date) }}'
-          MESSAGE='${{ toJSON(steps.extract.outputs.message) }}'
-          POST='${{ toJSON(steps.extract.outputs.post) }}'
-          python3 -c "
-          import json, sys, os
-          name = json.loads(sys.argv[1])
-          date = json.loads(sys.argv[2])
-          message = json.loads(sys.argv[3])
-          post = json.loads(sys.argv[4])
-          entry = '- name: \"' + name + '\"\n  date: \"' + date + '\"\n  message: \"' + message + '\"'
-          os.makedirs('_data/comments', exist_ok=True)
-          with open('_data/comments/' + post + '.yml', 'a', encoding='utf-8') as f:
-              f.write('\n' + entry + '\n')
-          "
-
-      - name: Commit and push
-        if: steps.extract.outputs.approved == 'true'
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add _data/
-          git diff --staged --quiet || git commit -m "Add ${{ steps.extract.outputs.type }} from ${{ steps.extract.outputs.name }}"
-          git push
-
-      - name: Trigger deploy
-        if: steps.extract.outputs.approved == 'true'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'jekyll.yml',
-              ref: 'main'
-            });
-
-      - name: Close issue
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const approved = '${{ steps.extract.outputs.approved }}' === 'true';
+            // Close issue
             await github.rest.issues.update({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
               state: 'closed',
-              state_reason: approved ? 'completed' : 'not_planned'
+              state_reason: isApproved ? 'completed' : 'not_planned'
             });
-      
+            console.log(`Issue closed as ${isApproved ? 'completed' : 'not_planned'}`);
