@@ -11,22 +11,21 @@ const RATE_LIMIT = {
 function rateLimited(ip) {
   const now = Date.now()
   const record = RATE_LIMIT.cache.get(ip)
+
+  // Lazy cleanup: delete stale entries as we encounter them
+  if (record && now - record.start > RATE_LIMIT.windowMs) {
+    RATE_LIMIT.cache.delete(ip)
+  }
+
   if (!record || now - record.start > RATE_LIMIT.windowMs) {
     RATE_LIMIT.cache.set(ip, { start: now, count: 1 })
     return false
   }
+
   record.count++
   if (record.count > RATE_LIMIT.maxRequests) return true
   return false
 }
-
-// Periodically clean stale entries from rate-limit cache
-setInterval(() => {
-  const now = Date.now()
-  for (const [ip, record] of RATE_LIMIT.cache) {
-    if (now - record.start > RATE_LIMIT.windowMs) RATE_LIMIT.cache.delete(ip)
-  }
-}, 60_000)
 
 function jsonResponse(body, status = 200) {
   return new Response(JSON.stringify(body), {
