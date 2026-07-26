@@ -3,6 +3,8 @@ layout: post
 title: "O fim das aulas"
 date: 2026-07-26
 categories: [pessoal]
+tags: [pessoal, blog, escrita]
+author: edwinnrm
 ---
 
 Com o fim das aulas tanto como aluno, quanto como professor, eu senti a necessidade de melhorar algumas coisas e uma delas é a minha escrita.
