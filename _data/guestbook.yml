@@ -2,7 +2,7 @@
   date: "2026-07-24"
   message: "Bem-vindos ao meu blog!"
 
-- name: "João Santos"
+- name: "JoÃ£o Santos"
   date: "2026-07-25"
   message: "Frutiger aero!"
 
@@ -14,3 +14,7 @@
   date: "2026-07-25"
   message: "Press F to Pay Respects"
 
+
+- name: "brns"
+  date: "2026-07-26"
+  message: "eu acho que tá funcionando man"
