@@ -73,7 +73,7 @@ permalink: /guestbook/
       var data = await res.json();
 
       if (data.success) {
-        status.textContent = 'Mensagem enviada com sucesso! Atualize a página para vê-la.';
+        status.textContent = 'Mensagem enviada para aprovação!';
         status.style.color = '#008000';
         document.getElementById('gb-name').value = '';
         document.getElementById('gb-message').value = '';
