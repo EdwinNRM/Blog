@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Links | edwinnrm</title>
+<title>Chat - em construção | edwinnrm</title>
 <meta name="description" content="Apenas um blog pessoal">
 <meta name="baseurl" content="/Blog/">
 
@@ -21,20 +21,20 @@
 <script src="/Blog/assets/js/emoticons.js"></script>
 
 <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Links | edwinnrm</title>
+<title>Chat - em construção | edwinnrm</title>
 <meta name="generator" content="Jekyll v3.10.0" />
-<meta property="og:title" content="Links" />
+<meta property="og:title" content="Chat - em construção" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Apenas um blog pessoal" />
 <meta property="og:description" content="Apenas um blog pessoal" />
-<link rel="canonical" href="https://edwinnrm.github.io/Blog/links/" />
-<meta property="og:url" content="https://edwinnrm.github.io/Blog/links/" />
+<link rel="canonical" href="https://edwinnrm.github.io/Blog/chat/" />
+<meta property="og:url" content="https://edwinnrm.github.io/Blog/chat/" />
 <meta property="og:site_name" content="edwinnrm" />
 <meta property="og:type" content="website" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Links" />
+<meta property="twitter:title" content="Chat - em construção" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebPage","description":"Apenas um blog pessoal","headline":"Links","url":"https://edwinnrm.github.io/Blog/links/"}</script>
+{"@context":"https://schema.org","@type":"WebPage","description":"Apenas um blog pessoal","headline":"Chat - em construção","url":"https://edwinnrm.github.io/Blog/chat/"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -86,14 +86,14 @@
     
       <li>
         <a href="/Blog/links/"
-           class="active">
+           class="">
           Links
         </a>
       </li>
     
       <li>
         <a href="/Blog/chat/"
-           class="">
+           class="active">
           Chat
         </a>
       </li>
@@ -155,23 +155,68 @@
       </div>
 
       <div class="main">
-        <h3>Links</h3>
+        <h3>Chat - em construção</h3>
 <div class="post-content">
-  <h3>Blogroll</h3>
-<p>Sites que eu recomendo:</p>
-
-<div class="neon-card">
-  <p><a href="https://seechain.neocities.org" target="_blank">Seechain</a> - inspiração pra esse blog</p>
+  <!-- Login modal -->
+<div id="chat-login" class="chat-login-overlay">
+  <div class="y2k-window chat-login-window">
+    <div class="y2k-window__titlebar">
+      <span>Chat - em construção</span>
+      <div class="y2k-window__buttons"><span>_</span><span>□</span><span>×</span></div>
+    </div>
+    <div class="y2k-window__body">
+      <div class="chat-login-form">
+        <label for="chat-nick">Seu nick:</label>
+        <input type="text" id="chat-nick" maxlength="20" placeholder="Nickname">
+        <label>Sua cor:</label>
+        <div id="chat-color-picker" class="chat-color-picker">
+          <span class="chat-color-dot" data-color="#0000ff" data-name="Azul" style="background:#0000ff" title="Azul"></span>
+          <span class="chat-color-dot" data-color="#008000" data-name="Verde" style="background:#008000" title="Verde"></span>
+          <span class="chat-color-dot" data-color="#ff0000" data-name="Vermelho" style="background:#ff0000" title="Vermelho"></span>
+          <span class="chat-color-dot" data-color="#800080" data-name="Roxo" style="background:#800080" title="Roxo"></span>
+          <span class="chat-color-dot" data-color="#8B4513" data-name="Marrom" style="background:#8B4513" title="Marrom"></span>
+        </div>
+        <p id="chat-login-error" class="chat-login-error"></p>
+        <button id="chat-login-btn" class="y2k-btn">Entrar</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<h3>Badges</h3>
-
-<div class="banner-exchange" style="margin: 8px 0;">
-  <img src="/Blog/assets/images/banners/steam.gif" alt="Steam" />
-  <img src="/Blog/assets/images/banners/firefox.gif" alt="Firefox" />
-  <img src="/Blog/assets/images/banners/backward.gif" alt="Backward compatible" />
-  <img src="/Blog/assets/images/banners/anybrowser3.gif" alt="Any browser" />
+<!-- Main chat -->
+<div id="chat-main" class="chat-layout" style="display:none">
+  <div class="y2k-window">
+    <div class="y2k-window__titlebar">
+      <span id="chat-window-title">lobby.txt</span>
+      <div class="y2k-window__buttons"><span>_</span><span>□</span><span>×</span></div>
+    </div>
+    <div class="y2k-window__body">
+      <div class="chat-info-bar">
+        <span class="y2k-tag">Sala: <span id="chat-current-room">Lobby</span></span>
+        <span class="y2k-tag">Online: <span id="chat-online-count">0</span></span>
+        <span class="y2k-tag">Nick: <span id="chat-current-nick"></span></span>
+      </div>
+      <div class="chat-container">
+        <div class="chat-sidebar">
+          <div class="sidebar-title" style="margin:0">SALAS</div>
+          <div id="chat-room-list" class="chat-room-list"></div>
+          <div class="sidebar-title" style="margin-top:8px">USUÁRIOS</div>
+          <div id="chat-user-list" class="chat-user-list"></div>
+        </div>
+        <div class="chat-main-area">
+          <div id="chat-messages" class="chat-messages"></div>
+          <div class="chat-input-area">
+            <textarea id="chat-input" placeholder="Digite sua mensagem..." rows="2"></textarea>
+            <button class="emoticon-picker-btn" data-target="chat-input" type="button" title="Inserir emoticon">😊</button>
+            <button id="chat-send-btn" class="y2k-btn" type="button">Enviar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+
+<script src="/Blog/assets/js/chat.js"></script>
 
 </div>
 
