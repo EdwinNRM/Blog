@@ -598,6 +598,59 @@
   }
 }
 
+// ============================
+// Emoticons
+// ============================
+
+.emoticon {
+  display: inline;
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.emoticon-picker-btn {
+  cursor: pointer;
+  background: none;
+  border: 1px outset $y2k-border-light;
+  padding: 2px 6px;
+  font-size: 16px;
+  line-height: 1;
+  font-family: $y2k-font-body;
+  background: $y2k-bg;
+
+  &:active {
+    border-style: inset;
+  }
+}
+
+.emoticon-picker {
+  position: absolute;
+  z-index: 1000;
+}
+
+.emoticon-picker__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 6px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.emoticon-picker__item {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  padding: 2px;
+  border: 1px solid transparent;
+
+  &:hover {
+    border-color: $y2k-border-mid;
+    background: $y2k-surface-light;
+  }
+}
+
 .guestbook-msg {
   margin-bottom: 8px;
   padding-bottom: 6px;

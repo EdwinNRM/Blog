@@ -11,7 +11,7 @@ Com o fim das aulas tanto como aluno, quanto como professor, eu senti a necessid
 
 Atualmente o máximo que tenho escrito são specs para um agente de IA desenvolver algo enquanto eu penso em como vou resolver o problema que ele vai gerar por criar uma solução robusta e escalável para um problema que poderia ter resolvido em uma linha.
 
-Sim Claude, tô falando de você mesmo. 🤬
+Sim Claude, tô falando de você mesmo. :@
 
 Confesso que ainda fico um pouco perdido com tudo que posso escrever ou colocar por aqui, mas a experiência de desenvolver o blog do zero, criar as minhas customizações e de quebra matar um pouco da nostalgia da época que a internet era um lugar menos tóxico, me deixa muito animado.
 

@@ -78,7 +78,10 @@ layout: default
       </div>
       <div class="comment-form__field">
         <label for="comment-message">Message:</label>
-        <textarea id="comment-message" placeholder="Seu comentário..." required></textarea>
+        <div style="display:flex; gap:4px; align-items:flex-start;">
+          <textarea id="comment-message" placeholder="Seu comentário..." required style="flex:1;"></textarea>
+          <button class="emoticon-picker-btn" data-target="comment-message" type="button" title="Inserir emoticon">😊</button>
+        </div>
       </div>
       <button id="comment-submit" class="comment-form__submit">Enviar</button>
       <p id="comment-status" style="font-size: 10px; color: #808080; margin-top: 4px;"></p>

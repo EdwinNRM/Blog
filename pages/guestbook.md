@@ -37,7 +37,10 @@ permalink: /guestbook/
   </div>
   <div class="guestbook-form__field">
     <label for="gb-message">Message:</label>
-    <textarea id="gb-message" placeholder="Leave your message..." required></textarea>
+    <div style="display:flex; gap:4px; align-items:flex-start;">
+      <textarea id="gb-message" placeholder="Leave your message..." required style="flex:1;"></textarea>
+      <button class="emoticon-picker-btn" data-target="gb-message" type="button" title="Inserir emoticon">😊</button>
+    </div>
   </div>
   <button id="gb-submit" class="guestbook-form__submit">Send</button>
   <p id="gb-status" style="font-size: 10px; color: #808080; margin-top: 4px;"></p>
