@@ -28,6 +28,7 @@ exclude:
   - vendor
   - PLAN.md
   - README.md
+  - assets/audio/README.md
   - add_music.py
 
 include:

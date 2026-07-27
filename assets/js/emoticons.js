@@ -65,7 +65,7 @@
   }
 
   function replaceAll() {
-    document.querySelectorAll(".post-content, .guestbook-msg__text, .comment-msg__text, .chat-msg__text").forEach(replaceInElement);
+    document.querySelectorAll(".post-content, .guestbook-msg__text, .comment-msg__text").forEach(replaceInElement);
   }
 
   // --- Picker ---
