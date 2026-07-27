@@ -60,7 +60,16 @@ layout: default
             <div class="comment-msg">
               <span class="comment-msg__name">{{ entry.name }}</span>
               <span class="comment-msg__date"> ({{ entry.date }})</span>
-              <p class="comment-msg__text">{{ entry.message | newline_to_br }}</p>
+              <p class="comment-msg__text">
+                {% assign raw_msg = entry.message %}
+                {% if raw_msg.size > 160 %}
+                  <span class="comment-preview">{{ raw_msg | truncate: 160 | newline_to_br }}</span>
+                  <span class="comment-full" style="display:none">{{ raw_msg | newline_to_br }}</span>
+                  <button class="y2k-btn comment-read-more" onclick="this.previousElementSibling.previousElementSibling.style.display='none';this.previousElementSibling.style.display='block';this.style.display='none'">Leia mais</button>
+                {% else %}
+                  {{ raw_msg | newline_to_br }}
+                {% endif %}
+              </p>
             </div>
           {% endfor %}
         {% else %}
