@@ -1,0 +1,29 @@
+name: Chat Daily Backup
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: node scripts/chat-backup.js
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          BACKUP_ENCRYPTION_KEY: ${{ secrets.BACKUP_ENCRYPTION_KEY }}
+      - run: |
+          git config user.name "chat-backup-bot"
+          git config user.email "bot@edwinnrm.dev"
+          git add _data/chat/backups/
+          git diff --cached --quiet || git commit -m "chat backup $(date +%Y-%m-%d)"
+          git push
