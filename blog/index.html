@@ -39,14 +39,12 @@
 
 <script>
 (function() {
-  var msg = "Bem vindos ao blog do edwinnrm";
+  var msg = "Bem-vindos ao blog do Edwinnrm";
   var i = 0;
-  var origTitle = document.title;
   setInterval(function() {
-    var spaced = msg + " | " + origTitle;
-    var scroll = spaced.substring(i) + " " + spaced.substring(0, i);
+    var scroll = msg.substring(i) + " " + msg.substring(0, i);
     document.title = scroll;
-    i = (i + 1) % spaced.length;
+    i = (i + 1) % msg.length;
   }, 300);
 })();
 </script>
