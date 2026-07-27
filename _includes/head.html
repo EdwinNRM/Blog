@@ -10,11 +10,24 @@
 
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">
-<link rel="alternate icon" type="image/x-icon" href="{{ '/favicon.ico' | relative_url }}">
+<link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
 <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ '/feed.xml' | relative_url }}">
 
 <script>window._EMOTICONS = {{ site.data.emoticons | jsonify }};</script>
 <script src="{{ '/assets/js/emoticons.js' | relative_url }}"></script>
 
 {% seo %}
+
+<script>
+(function() {
+  var msg = "Bem vindos ao blog do edwinnrm";
+  var i = 0;
+  var origTitle = document.title;
+  setInterval(function() {
+    var spaced = msg + " | " + origTitle;
+    var scroll = spaced.substring(i) + " " + spaced.substring(0, i);
+    document.title = scroll;
+    i = (i + 1) % spaced.length;
+  }, 300);
+})();
+</script>
