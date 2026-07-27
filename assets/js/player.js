@@ -237,20 +237,17 @@
     var playIcon = document.querySelector(".cd-player__play-icon");
     var pauseIcon = document.querySelector(".cd-player__pause-icon");
     var cover = document.getElementById("player-cover");
-    var titleIcon = document.querySelector(".cd-player__titlebar-icon");
     var statusEl = document.getElementById("player-status");
     if (!playIcon || !pauseIcon) return;
     if (isPlaying) {
       playIcon.style.display = "none";
       pauseIcon.style.display = "inline";
       if (cover) cover.classList.add("cd-player__cover--spinning");
-      if (titleIcon) titleIcon.classList.add("cd-player__titlebar-icon--spin");
       if (statusEl) statusEl.innerHTML = "\u25B6 Playing";
     } else {
       playIcon.style.display = "inline";
       pauseIcon.style.display = "none";
       if (cover) cover.classList.remove("cd-player__cover--spinning");
-      if (titleIcon) titleIcon.classList.remove("cd-player__titlebar-icon--spin");
       if (statusEl) statusEl.innerHTML = "\u25B6 Paused";
     }
   }

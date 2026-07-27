@@ -25,11 +25,6 @@
   animation: spin 4s linear infinite;
 }
 
-.cd-player__titlebar-icon--spin {
-  display: inline-block;
-  animation: spin 4s linear infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
