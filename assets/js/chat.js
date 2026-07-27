@@ -381,6 +381,7 @@
       }, 200);
     }).catch(function () {});
 
+    sendMessage(state.room, state.nick, state.nick + " entrou na sala", state.color, "join").catch(function () {});
     upsertUser(state.nick, state.color, state.room).catch(function () {});
     startPolling();
     startHeartbeat();
@@ -389,6 +390,7 @@
   function cleanup() {
     stopPolling();
     stopHeartbeat();
+    sendMessage(state.room, state.nick, state.nick + " saiu da sala", state.color, "leave").catch(function () {});
     deleteUser(state.nick, state.room).catch(function () {});
   }
 
@@ -411,6 +413,13 @@
     });
 
     dom.sendBtn.addEventListener("click", handleSend);
+
+    byId("chat-logout-btn").addEventListener("click", function () {
+      cleanup();
+      localStorage.removeItem("chat_nick");
+      localStorage.removeItem("chat_color");
+      location.reload();
+    });
 
     dom.input.addEventListener("keydown", function (e) {
       if (e.key === "Enter" && !e.shiftKey) {
