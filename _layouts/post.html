@@ -60,7 +60,7 @@ layout: default
             <div class="comment-msg">
               <span class="comment-msg__name">{{ entry.name }}</span>
               <span class="comment-msg__date"> ({{ entry.date }})</span>
-              <p class="comment-msg__text">{{ entry.message }}</p>
+              <p class="comment-msg__text">{{ entry.message | newline_to_br }}</p>
             </div>
           {% endfor %}
         {% else %}

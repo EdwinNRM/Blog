@@ -18,7 +18,7 @@ permalink: /guestbook/
       <div class="guestbook-msg">
         <span class="guestbook-msg__name">{{ entry.name }}</span>
         <span class="guestbook-msg__date"> ({{ entry.date }})</span>
-        <p class="guestbook-msg__text">{{ entry.message }}</p>
+        <p class="guestbook-msg__text">{{ entry.message | newline_to_br }}</p>
       </div>
     {% endfor %}
 

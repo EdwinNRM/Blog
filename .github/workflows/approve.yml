@@ -40,12 +40,29 @@ jobs:
               name = parts[1] || '';
             }
 
-            // Extract message and date from body
+            // Extract message (multiline) and date from body
             let message = '', date = '';
-            for (const line of body.split('\n')) {
+            const lines = body.split('\n');
+            let inMessage = false;
+            for (const line of lines) {
               const t = line.trim();
-              if (t.startsWith('**Message:**')) message = t.replace('**Message:**', '').trim();
-              if (t.startsWith('**Date:**')) date = t.replace('**Date:**', '').trim();
+              if (t.startsWith('**Message:**')) {
+                message = t.replace('**Message:**', '').trim();
+                inMessage = true;
+                continue;
+              }
+              if (t.startsWith('**Date:**')) {
+                date = t.replace('**Date:**', '').trim();
+                inMessage = false;
+                continue;
+              }
+              if (inMessage && t.startsWith('**')) {
+                inMessage = false;
+                continue;
+              }
+              if (inMessage) {
+                message += '\n' + t;
+              }
             }
             if (!date) date = new Date().toISOString().split('T')[0];
 
@@ -55,7 +72,7 @@ jobs:
 
             // Escape YAML-special characters (backslash and double quote)
             function yamlEscape(s) {
-              return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"');
+              return s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
             }
 
             // Write to data file if approved
