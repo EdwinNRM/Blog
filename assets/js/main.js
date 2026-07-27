@@ -71,6 +71,7 @@
 
         updateActiveLink(url.pathname);
         applyFadeIn();
+        if (window._emoticonsPJAX) window._emoticonsPJAX();
       });
   }
 
