@@ -17,6 +17,7 @@ permalink: /sitemap/
 ├── <a href="{{ '/' | relative_url }}">Home</a>
 ├── <a href="{{ '/blog/' | relative_url }}">Blog</a>{% for post in site.posts %}
 │   └── <a href="{{ post.url | relative_url }}">{{ post.title }}</a>{% endfor %}
+├── <a href="{{ '/animes/' | relative_url }}">Animes</a>
 ├── <a href="{{ '/gallery/' | relative_url }}">Galeria</a>
 ├── <a href="{{ '/guestbook/' | relative_url }}">Guestbook</a>
 ├── <a href="{{ '/links/' | relative_url }}">Links</a>
