@@ -77,6 +77,15 @@ jobs:
 
             // Write to data file if approved
             if (isApproved && type) {
+              const cp = require('child_process');
+              const run = (args) => {
+                const r = cp.spawnSync('git', args, { stdio: 'pipe' });
+                if (r.status !== 0) {
+                  console.log(`git ${args.join(' ')} failed (${r.status}): ${(r.stderr || '').toString().trim()}`);
+                }
+                return r.status;
+              };
+              const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
               const entry = `\n- name: "${yamlEscape(name)}"\n  date: "${yamlEscape(date)}"\n  message: "${yamlEscape(message)}"\n`;
 
               if (type === 'guestbook') {
@@ -88,32 +97,52 @@ jobs:
                 fs.appendFileSync(`${dir}/${post}.yml`, entry, 'utf-8');
                 console.log(`Appended to _data/comments/${post}.yml`);
               }
-            }
 
-            // Commit and push if approved
-            if (isApproved && type) {
-              const cp = require('child_process');
-              cp.spawnSync('git', ['config', 'user.name', 'github-actions[bot]'], { stdio: 'pipe' });
-              cp.spawnSync('git', ['config', 'user.email', 'github-actions[bot]@users.noreply.github.com'], { stdio: 'pipe' });
-              cp.spawnSync('git', ['add', '_data/'], { stdio: 'pipe' });
+              run(['config', 'user.name', 'github-actions[bot]']);
+              run(['config', 'user.email', 'github-actions[bot]@users.noreply.github.com']);
+              run(['add', '_data/']);
 
-              const diffResult = cp.spawnSync('git', ['diff', '--staged', '--quiet'], { stdio: 'pipe' });
-              if (diffResult.status !== 0) {
-                cp.spawnSync('git', ['commit', '-m', `Add ${type} from ${name}`], { stdio: 'pipe' });
-                cp.spawnSync('git', ['pull', '--rebase'], { stdio: 'pipe' });
-                cp.spawnSync('git', ['push'], { stdio: 'pipe' });
-                console.log('Committed and pushed');
-
-                // Trigger deploy
-                await github.rest.actions.createWorkflowDispatch({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  workflow_id: 'jekyll.yml',
-                  ref: 'main'
-                });
-                console.log('Deploy triggered');
-              } else {
+              if (run(['diff', '--staged', '--quiet']) === 0) {
                 console.log('No changes to commit');
+              } else {
+                run(['commit', '-m', `Add ${type} from ${name}`]);
+                console.log('Committed');
+
+                // Push with retries: concurrent approval runs can modify the same
+                // _data file, so recover from rejected pushes/conflicts by
+                // resetting to origin and re-applying the entry.
+                let pushed = false;
+                for (let attempt = 0; attempt < 10 && !pushed; attempt++) {
+                  if (run(['push']) === 0) {
+                    pushed = true;
+                    break;
+                  }
+                  console.log(`Push failed on attempt ${attempt + 1}, syncing with origin...`);
+                  if (run(['pull', '--rebase']) !== 0) {
+                    run(['rebase', '--abort']);
+                    run(['fetch', 'origin']);
+                    run(['reset', '--hard', 'origin/main']);
+                    fs.appendFileSync('_data/guestbook.yml', entry, 'utf-8');
+                    run(['add', '_data/']);
+                    run(['commit', '-m', `Add ${type} from ${name}`]);
+                  }
+                  await sleep(3000);
+                }
+
+                if (pushed) {
+                  console.log('Committed and pushed');
+
+                  // Trigger deploy
+                  await github.rest.actions.createWorkflowDispatch({
+                    owner: context.repo.owner,
+                    repo: context.repo.repo,
+                    workflow_id: 'jekyll.yml',
+                    ref: 'main'
+                  });
+                  console.log('Deploy triggered');
+                } else {
+                  console.log('Push failed after retries');
+                }
               }
             }
 
