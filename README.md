@@ -109,7 +109,7 @@ Automatic replacement in guestbook and comments. Picker available on guestbook a
 │   ├── images/
 │   │   ├── emoticons/       # 69 MSN emoticon GIFs
 │   │   ├── favicon.ico      # Site favicon
-│   │   └── cover-default.svg
+│   │   └── cover-default.png
 │   └── js/
 │       ├── main.js          # Site JS
 │       ├── player.js        # CD Player

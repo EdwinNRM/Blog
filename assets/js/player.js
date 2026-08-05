@@ -142,7 +142,7 @@
     if (track.cover) {
       return window._PLAYER_BASEURL + "assets/images/" + encodeURIComponent(track.cover);
     }
-    return window._PLAYER_BASEURL + "assets/images/cover-default.svg";
+    return window._PLAYER_BASEURL + "assets/images/cover-default.png";
   }
 
   function loadTrack(index) {
