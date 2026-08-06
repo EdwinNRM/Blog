@@ -132,6 +132,23 @@ jobs:
                 if (pushed) {
                   console.log('Committed and pushed');
 
+                  // Wait until the pushed commit is visible on origin/main
+                  // before dispatching the deploy. Otherwise the dispatched
+                  // run may check out a stale main and deploy without the
+                  // newly approved content (see GH Actions ref propagation).
+                  const headRes = cp.spawnSync('git', ['rev-parse', 'HEAD'], { stdio: 'pipe' });
+                  const headSha = (headRes.stdout || '').toString().trim();
+                  let visible = false;
+                  for (let i = 0; i < 30 && !visible; i++) {
+                    const ls = cp.spawnSync('git', ['ls-remote', 'origin', 'refs/heads/main'], { stdio: 'pipe' });
+                    const remoteHead = (ls.stdout || '').toString().trim().split(/\s+/)[0];
+                    visible = remoteHead === headSha;
+                    if (!visible) await sleep(3000);
+                  }
+                  console.log(visible
+                    ? 'origin/main is up to date with pushed commit'
+                    : 'origin/main not yet updated after retries, dispatching anyway');
+
                   // Trigger deploy
                   await github.rest.actions.createWorkflowDispatch({
                     owner: context.repo.owner,
